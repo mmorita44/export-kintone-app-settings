@@ -1,0 +1,10 @@
+*.pyc
+
+# Packages
+*.egg
+*.egg-info
+/dist/*
+
+.pytest_cache
+.python-version
+.vscode/*
