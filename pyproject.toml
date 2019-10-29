@@ -6,10 +6,14 @@ authors = ["Masato Morita <mamorita@m-sol.co.jp>"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
+requests = "^2.22"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
 pylint = "^2.4"
+
+[tool.poetry.scripts]
+export_kintone_app_settings = 'export_kintone_app_settings:main'
 
 [build-system]
 requires = ["poetry>=0.12"]
