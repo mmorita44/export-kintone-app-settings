@@ -17,6 +17,22 @@ class Kintone:
                 filename = self.file_format.format(app_id, datetime.today().strftime("%Y%m%d%H%M%S"))
                 with open(filename, 'w') as file:
                     file.writelines('{')
+                    # 一般設定
+                    resp = session.get(f'https://{self.domain}.cybozu.com/k/v1/app/settings.json?app={app_id}',
+                                       headers=self.headers)
+                    file.writelines(f'"一般設定": {resp.content.decode("utf-8")},')
+                    # フィールドの一覧
+                    resp = session.get(f'https://{self.domain}.cybozu.com/k/v1/app/form/fields.json?app={app_id}',
+                                       headers=self.headers)
+                    file.writelines(f'"フィールドの一覧": {resp.content.decode("utf-8")},')
+                    # フォームのレイアウト
+                    resp = session.get(f'https://{self.domain}.cybozu.com/k/v1/app/form/layout.json?app={app_id}',
+                                       headers=self.headers)
+                    file.writelines(f'"フォームのレイアウト": {resp.content.decode("utf-8")},')
+                    # 一覧の設定
+                    resp = session.get(f'https://{self.domain}.cybozu.com/k/v1/app/views.json?app={app_id}',
+                                       headers=self.headers)
+                    file.writelines(f'"一覧の設定": {resp.content.decode("utf-8")},')
                     # アプリのアクセス権
                     resp = session.get(f'https://{self.domain}.cybozu.com/k/v1/app/acl.json?app={app_id}',
                                        headers=self.headers)
