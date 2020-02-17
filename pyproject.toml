@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "export-kintone-app-settings"
-version = "0.1.2"
+version = "0.1.3"
 description = ""
 authors = ["Masato Morita <mamorita@m-sol.co.jp>"]
 
