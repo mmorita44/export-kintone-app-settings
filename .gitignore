@@ -6,5 +6,5 @@
 /dist/*
 
 .pytest_cache
-.python-version
 .vscode/*
+.venv/*

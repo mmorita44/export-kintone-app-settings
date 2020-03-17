@@ -1,16 +1,16 @@
 [tool.poetry]
 name = "export-kintone-app-settings"
-version = "0.1.3"
+version = "0.1.4"
 description = ""
 authors = ["Masato Morita <mamorita@m-sol.co.jp>"]
 
 [tool.poetry.dependencies]
-python = "^3.6"
-requests = "^2.22"
+python = "^3.7"
+requests = "^2.23.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^3.0"
-pylint = "^2.4"
+pytest = "^5.4.1"
+pylint = "^2.4.4"
 
 [tool.poetry.scripts]
 export_kintone_app_settings = 'export_kintone_app_settings:main'
