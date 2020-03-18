@@ -2,16 +2,19 @@ import base64
 import traceback
 from datetime import datetime
 from requests import Session
+from pathlib import Path
 
 class Kintone:
     def __init__(self, domain, login_name, password):
         authorization = base64.b64encode((login_name + ':' + password).encode('utf-8'))
         self.headers = {'X-Cybozu-Authorization': authorization.decode('utf-8')}
         self.domain = domain
-        self.file_format = 'app_{}_{}.json'
+        self.file_format = 'app_{}_settings.json'
 
     def export(self, app_ids):
         try:
+            export_dir = Path(datetime.today().strftime("%Y%m%d%H%M%S"))
+            export_dir.mkdir()
             session = Session()
             for app_id in app_ids:
                 file_contents = []
@@ -81,8 +84,8 @@ class Kintone:
                 file_contents.append(f'"プロセス管理の設定": {resp.content.decode("utf-8")}\n')
                 file_contents.append('}')
 
-                filename = self.file_format.format(app_id, datetime.today().strftime("%Y%m%d%H%M%S"))
-                with open(filename, 'w') as file:
+                filename = self.file_format.format(app_id)
+                with export_dir.joinpath(filename).open(mode='w') as file:
                     file.writelines(file_contents)
             return 0
         except Exception:
