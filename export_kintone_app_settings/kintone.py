@@ -85,7 +85,7 @@ class Kintone:
 
                 filename = self.file_format.format(app_id)
                 with export_dir.joinpath(filename).open(mode='w') as file:
-                    json.dump(file_contents, file, ensure_ascii=False, indent=4, sort_keys=True, separators=(',', ': '))
+                    json.dump(file_contents, file, ensure_ascii=False, indent=2, sort_keys=True, separators=(',', ': '))
             return 0
         except Exception:
             print(traceback.format_exc())
