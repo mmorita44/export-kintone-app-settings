@@ -94,6 +94,30 @@ class Kintone:
                                     .format(app_id, resp.status_code, resp.content.decode("utf-8")))
                 file_contents["プロセス管理の設定"] = json.loads(
                     resp.content.decode("utf-8"))
+                # アプリの条件通知
+                resp = session.get(f'https://{self.domain}.cybozu.com/k/v1/app/notifications/general.json?app={app_id}',
+                                   headers=self.headers)
+                if resp.status_code != 200:
+                    raise Exception('[Error] app_id: {}, status_code: {}, content: {}'
+                                    .format(app_id, resp.status_code, resp.content.decode("utf-8")))
+                file_contents["アプリの条件通知"] = json.loads(
+                    resp.content.decode("utf-8"))
+                # レコードの条件通知
+                resp = session.get(f'https://{self.domain}.cybozu.com/k/v1/app/notifications/perRecord.json?app={app_id}',
+                                   headers=self.headers)
+                if resp.status_code != 200:
+                    raise Exception('[Error] app_id: {}, status_code: {}, content: {}'
+                                    .format(app_id, resp.status_code, resp.content.decode("utf-8")))
+                file_contents["レコードの条件通知"] = json.loads(
+                    resp.content.decode("utf-8"))
+                # リマインダーの条件通知
+                resp = session.get(f'https://{self.domain}.cybozu.com/k/v1/app/notifications/reminder.json?app={app_id}',
+                                   headers=self.headers)
+                if resp.status_code != 200:
+                    raise Exception('[Error] app_id: {}, status_code: {}, content: {}'
+                                    .format(app_id, resp.status_code, resp.content.decode("utf-8")))
+                file_contents["リマインダーの条件通知"] = json.loads(
+                    resp.content.decode("utf-8"))
 
                 filename = self.file_format.format(app_id)
                 with export_dir.joinpath(filename).open(mode='w') as file:
